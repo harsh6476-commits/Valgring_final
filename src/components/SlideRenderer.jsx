@@ -166,8 +166,20 @@ function ConceptSlide({ c, showToast }) {
       {c.commandCards && <CommandCards cards={c.commandCards} showToast={showToast} />}
       {c.questionCards && <QuestionCards cards={c.questionCards} />}
       {c.limitCards && <LimitCards cards={c.limitCards} />}
-      {c.vsTable && <VSTable d={c.vsTable} />}
-      {c.recapTable && <RecapTable d={c.recapTable} />}
+      {(c.vsTable || c.recapTable) && (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3">
+          {c.vsTable && (
+            <div className="lg:col-span-5">
+              <VSTable d={c.vsTable} />
+            </div>
+          )}
+          {c.recapTable && (
+            <div className="lg:col-span-7">
+              <RecapTable d={c.recapTable} />
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }
@@ -625,13 +637,35 @@ function TwoColExplainer({ d }) {
 
 function CommandCards({ cards, showToast }) {
   return (
-    <div className="space-y-2.5">
-      {cards.map((card, i) => (
-        <div key={i} className="space-y-0.5">
-          <CodePanel filename="terminal" text={card.cmd} language="bash" showToast={showToast} />
-          <p className="text-[11px] text-slate-500 font-medium px-2">{card.desc}</p>
-        </div>
-      ))}
+    <div className="space-y-1.5">
+      <div className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">
+        Essential Valgrind Flags
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+        {cards.map((card, i) => (
+          <div
+            key={i}
+            className="p-2.5 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-white hover:border-violet-300 transition-all flex flex-col justify-between shadow-2xs group"
+          >
+            <div className="flex items-center justify-between gap-1.5 mb-1">
+              <code className="text-[11px] font-mono font-bold text-violet-700 bg-white px-2 py-0.5 rounded border border-slate-200 truncate">
+                {card.cmd}
+              </code>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(card.cmd)
+                  if (showToast) showToast('Command copied!')
+                }}
+                className="text-[10px] font-mono text-slate-400 hover:text-violet-600 px-1.5 py-0.5 rounded bg-white border border-slate-200 cursor-pointer flex-shrink-0"
+                title="Copy flag command"
+              >
+                Copy
+              </button>
+            </div>
+            <p className="text-[11px] text-slate-600 leading-tight">{card.desc}</p>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
@@ -670,26 +704,36 @@ function IndexDiagram({ d }) {
 
 function QuestionCards({ cards }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
-      {cards.map((card, i) => (
-        <div key={i} className="p-3 rounded-lg border border-slate-200 bg-white">
-          <div className="text-xs text-slate-600 mb-1">{card.q}</div>
-          <div className="text-xs font-mono font-bold text-violet-700">→ {card.a}</div>
-        </div>
-      ))}
+    <div className="space-y-1">
+      <div className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">
+        Valgrind Tool Selection
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
+        {cards.map((card, i) => (
+          <div key={i} className="p-2.5 rounded-xl border border-slate-200 bg-white shadow-2xs">
+            <div className="text-[11px] text-slate-600 mb-1 leading-snug">{card.q}</div>
+            <div className="text-xs font-mono font-bold text-violet-700 truncate">→ {card.a}</div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
 
 function LimitCards({ cards }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-      {cards.map((card, i) => (
-        <div key={i} className="p-3 rounded-lg border border-slate-200 bg-slate-50">
-          <div className="text-xs font-bold text-slate-900 mb-0.5">{card.title}</div>
-          <div className="text-xs text-slate-600">{card.desc}</div>
-        </div>
-      ))}
+    <div className="space-y-1">
+      <div className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">
+        Key Tool Limitations
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+        {cards.map((card, i) => (
+          <div key={i} className="p-2.5 rounded-xl border border-slate-200 bg-slate-50">
+            <div className="text-xs font-bold text-slate-900 mb-0.5 truncate">{card.title}</div>
+            <div className="text-[11px] text-slate-600 leading-snug">{card.desc}</div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
