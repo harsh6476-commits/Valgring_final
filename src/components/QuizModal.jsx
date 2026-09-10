@@ -93,7 +93,7 @@ export default function QuizModal({ onClose, showToast }) {
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-200 bg-slate-50/70 flex-shrink-0">
           <div className="flex items-center gap-2.5">
-            <span className="text-lg">⚡</span>
+            
             <h3 className="font-bold text-slate-900 text-sm sm:text-base">
               Valgrind Memory Assessment
             </h3>
@@ -272,13 +272,7 @@ export default function QuizModal({ onClose, showToast }) {
                 })}
               </div>
 
-              {/* Explanation box when answer is locked */}
-              {(locked || answers[currentQ] !== undefined) && q.explanation && (
-                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 leading-relaxed animate-fade-in">
-                  <span className="font-bold text-slate-900">💡 Explanation: </span>
-                  {q.explanation}
-                </div>
-              )}
+
 
               {/* Footer Actions */}
               <div className="flex items-center justify-between pt-3 border-t border-slate-100">

@@ -25,7 +25,7 @@ export default function Header({ slideTitle, slideNumber, total, progress, onTog
           {/* Quiz Button */}
           <button
             onClick={onOpenQuiz}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r from-violet-600 to-pink-600 text-white shadow-xs hover:shadow transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold bg-gradient-to-r from-violet-600 to-pink-600 text-white shadow-xs hover:shadow transition-all cursor-pointer"
           >
             <span>⚡</span>
             <span>Quiz</span>

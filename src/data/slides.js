@@ -9,7 +9,7 @@ const slides = [
       kicker: 'GUEST LECTURE · SYSTEMS PROGRAMMING',
       title: 'Memory Debugging\nwith Valgrind',
       subtitle: 'Memory leaks, invalid memory access, Valgrind tools',
-      team: "Hacker's Party",
+      team: "Havker's Party",
       members: ['Arihant Yadav', 'Achyut Mani', 'Harsh Prajapati', 'Om Rai'],
       terminal: {
         filename: 'terminal',
@@ -513,7 +513,7 @@ int main() {
     grad: 'grad-hero',
     content: {
       heading: "Congratulations —\nyou've debugged your first heap.",
-      team: "Hacker's Party",
+      team: "Havker's Party",
       members: ['Arihant Yadav', 'Achyut Mani', 'Harsh Prajapati', 'Om Rai'],
       terminal: {
         filename: 'next_steps.sh',
@@ -524,7 +524,7 @@ int main() {
           '# 3. Use --track-origins=yes for uninitialized-value tracing',
           '',
           'echo "Keep debugging, keep building!"',
-          'echo "— Hacker\'s Party"',
+          'echo "— Havker\'s Party"',
         ],
       },
     },

@@ -9,7 +9,7 @@ export default function SlideRenderer({ slide, showToast }) {
       <div className={`h-1.5 w-full flex-shrink-0 ${getAccentGradient(slide.module || 0)}`} />
 
       {/* Slide body */}
-      <div className="p-5 sm:p-7 md:p-8 lg:p-10 flex-1 flex flex-col justify-center overflow-hidden">
+      <div className="p-4 sm:p-6 md:p-8 lg:p-9 flex-1 flex flex-col justify-center overflow-y-auto">
         {renderSlideContent(type, content, showToast)}
       </div>
     </div>
@@ -222,9 +222,9 @@ function ChallengeSlide({ c, showToast }) {
       {c.indexDiagram && <IndexDiagram d={c.indexDiagram} />}
 
       {/* Prompt banner */}
-      <div className="p-3 rounded-xl bg-violet-50 border border-violet-200 flex items-center justify-between text-xs text-violet-950 font-semibold">
+      <div className="p-3 rounded-xl bg-violet-50 border border-violet-200 flex items-center justify-center text-xs text-violet-950 font-semibold">
         <span>❓ What does Valgrind report for this code snippet?</span>
-        <span className="font-mono text-violet-600 font-bold">Classroom Discussion</span>
+      
       </div>
     </div>
   )
