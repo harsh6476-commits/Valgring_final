@@ -670,7 +670,45 @@ export const quizQuestions = [
     ],
     correct: 1,
     explanation: 'Freeing the row pointer array before freeing each m[i] row block orphans all the row buffers in heap memory.'
-  },
+  },{
+    id: 'q11',
+    question: 'Two memory blocks are allocated. The pointer p is then made to point to q, and only p is freed. What happens?',
+    code: `int *p = malloc(10 * sizeof(int));\n\nint *q = malloc(20 * sizeof(int));\n\np = q;\n\nfree(p);`,
+    options: [
+        'A) No memory leak; both blocks are freed automatically.',
+        'B) The first block is leaked, while the second block is freed.',
+        'C) The second block is leaked, while the first block is freed.',
+        'D) Both blocks are leaked.'
+    ],
+    correct: 1,
+    explanation: 'After p = q, both pointers point to the second block. The original block allocated for p has no pointer to it and is leaked. free(p) frees the second block.'
+},
+{
+    id: 'q12',
+    question: 'How many dynamically allocated memory blocks are leaked?',
+    code: `int **arr = malloc(4 * sizeof(int *));\n\nfor (int i = 0; i < 4; i++) {\n    arr[i] = malloc(10 * sizeof(int));\n}\n\nfree(arr[1]);\nfree(arr[3]);\n\narr[1] = malloc(20 * sizeof(int));\n\nfree(arr);`,
+    options: [
+        'A) 0',
+        'B) 1',
+        'C) 2',
+        'D) 3'
+    ],
+    correct: 3,
+    explanation: 'There are 5 allocations: the outer array and 4 rows. Rows 1 and 3 are freed. A new block is allocated for arr[1], but it is never freed. free(arr) only frees the outer block. Therefore row 0, row 2, and the new arr[1] block are leaked: 3 blocks.'
+},
+{
+    id: 'q13',
+    question: 'Which statement is correct about the allocated memory blocks?',
+    code: `int *p = malloc(5 * sizeof(int));\nint *q = malloc(10 * sizeof(int));\n\nint **r = malloc(sizeof(int *));\n\n*r = p;\n\np = q;\n\nfree(p);\nfree(r);`,
+    options: [
+        'A) No memory leak; free(r) also frees *r.',
+        'B) Block pointed to by q is leaked, while block pointed to by *r is freed.',
+        'C) Block originally pointed to by p is leaked, while the block pointed to by q is freed.',
+        'D) Both dynamically allocated integer arrays are freed.'
+    ],
+    correct: 2,
+    explanation: 'Initially p points to the first integer array and q points to the second. *r stores the address of the first array. When p = q, the first array is still reachable through *r. free(p) frees the second array, while free(r) only frees the pointer block r; it does not free the memory pointed to by *r. Therefore the original p block is leaked.'
+}
 ]
 
 export default slides
