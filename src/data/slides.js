@@ -350,7 +350,7 @@ int main() {
         arr[i] = i + 1;
     }
     printf("arr[0] = %d\\n", arr[0]);
-    return 0;   // BUG: missing free(arr)
+    return 0;  
 }`,
       },
       output: {
